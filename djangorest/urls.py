@@ -22,7 +22,7 @@ from userapp.views import UserModelViewSet
 from todoapp.views import TodoModelViewSet, ProjectModelViewSet
 
 router = DefaultRouter()
-router.register('users', UserModelViewSet)
+router.register('users', UserModelViewSet, basename='users')
 router.register('todo', TodoModelViewSet)
 router.register('projects', ProjectModelViewSet)
 
