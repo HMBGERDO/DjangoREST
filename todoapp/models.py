@@ -12,3 +12,4 @@ class TodoModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     text = models.TextField(max_length=1500)
+    active = models.BooleanField(default=True)
