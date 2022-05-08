@@ -5,6 +5,7 @@ from rest_framework import status
 from .models import TodoModel, ProjectModel
 from .serializers import TodoModelSerializer, ProjectModelSerializer
 from .filters import ProjectFilter
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 
 class ProjectModelLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 10
@@ -13,6 +14,7 @@ class TodoModelLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 20
 
 class TodoModelViewSet(ModelViewSet):
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     pagination_class = TodoModelLimitOffsetPagination
     queryset = TodoModel.objects.all()
     serializer_class = TodoModelSerializer
@@ -25,6 +27,7 @@ class TodoModelViewSet(ModelViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ProjectModelViewSet(ModelViewSet):
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     pagination_class = ProjectModelLimitOffsetPagination
     queryset = ProjectModel.objects.all()
     serializer_class = ProjectModelSerializer
