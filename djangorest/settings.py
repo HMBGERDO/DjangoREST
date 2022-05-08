@@ -17,6 +17,14 @@ from temp import info
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Fix for djangorest graphQL using forse_text instead of force_str
+# This problem seems to be only in Django 4.0+ versions
+# Source https://stackoverflow.com/questions/70382084/import-error-force-text-from-django-utils-encoding
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -45,6 +53,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'drf_yasg',
+    'graphene_django',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -154,3 +163,7 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "userapp.UserModel"
+
+GRAPHENE = {
+    "SCHEMA": "djangorest.schema.schema",
+}
